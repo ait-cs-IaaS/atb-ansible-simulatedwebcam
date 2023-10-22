@@ -1,0 +1,12 @@
+[Unit]
+Description=Starts the Webcam Simulation
+After=network.target
+
+[Service]
+Type=simple
+User=camuser
+ExecStart=ffmpeg -re -stream_loop -1 -i {{simulatedwebcam_video}} -c copy -f rtsp {{simulatedwebcam_rtsp_url}}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
